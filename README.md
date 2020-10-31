@@ -1,4 +1,4 @@
-# vue3practice
+# crud app front end vue practice
 
 ## Project setup
 ```
