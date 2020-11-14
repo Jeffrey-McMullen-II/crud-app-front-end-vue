@@ -1,6 +1,9 @@
 <div>
     <h1>This is an about page</h1>
     
+    <input type="file" v-on:change="onFileSelected($event)">
+    <button v-on:click="onUploadCLicked()">Upload!</button>
+
     <div v-for="user in users" v-bind:key="user.id">
         {{ user.id }} |
         {{ user.email }} |
