@@ -13,7 +13,7 @@ export default class AboutModule extends VuexModule {
 
   @Action
   public async fetchAllUsers() {
-    await axios.get('http://localhost/ng-crud-app-backend-php/public/api/users/first-name/ascending')
+    await axios.get('http://localhost/ng-crud-app-back-end-php/public/api/users/first-name/ascending')
     .then((response: AxiosResponse<IUser>) => { this.context.commit('setUsers', response.data); })
     .catch((error) => { console.log(error); });
   }

@@ -24,7 +24,7 @@ export default class About extends Vue {
   mounted() {
     this.fetchAllUsers();
 
-    axios.get('http://localhost/ng-crud-app-backend-php/public/api/files/1')
+    axios.get('http://localhost/ng-crud-app-back-end-php/public/api/files/1')
     .then((response: AxiosResponse<IFile>) => { this.returnedFileContents = response.data.fileContents; })
     .catch((error) => { console.log(error); });
   }
@@ -50,6 +50,6 @@ export default class About extends Vue {
       fileContents: this.uploadFileContents
     }
 
-    axios.post('http://localhost/ng-crud-app-backend-php/public/api/files', file);
+    axios.post('http://localhost/ng-crud-app-back-end-php/public/api/files', file);
   }
 }
