@@ -1,41 +1,55 @@
+import axios, { AxiosResponse } from 'axios';
 import { Vue } from 'vue-class-component';
 import { namespace } from 'vuex-class';
-import axios from 'axios';
 
-import User from './shared/models/User';
+import IUser from './shared/models/IUser';
+import IFile from './shared/models/IFile';
 
 const AboutModule = namespace('AboutModule');
+
 export default class About extends Vue {
 
-  @AboutModule.Getter('getUsers') getUsers!: User[];
+  @AboutModule.Getter('getUsers') getUsers!: IUser[];
   @AboutModule.Action('fetchAllUsers') fetchAllUsers!: () => void;
 
-  selectedFile!: File;
+  uploadFile: File | null = null;
+  uploadFileContents: string | ArrayBuffer | null = null;
 
-  get users(): User[] {
+  returnedFileContents: string | ArrayBuffer | null = null;
+
+  get users(): IUser[] {
     return this.getUsers;
   }
 
   mounted() {
     this.fetchAllUsers();
+
+    axios.get('http://localhost/ng-crud-app-backend-php/public/api/files/1')
+    .then((response: AxiosResponse<IFile>) => { this.returnedFileContents = response.data.fileContents; })
+    .catch((error) => { console.log(error); });
   }
 
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
+  // eslint-disable-next-line
+  onFileSelected(fileList: FileList) {
+    if (!fileList.length) { return; }
+
+    this.uploadFile = fileList[0];
+
+    const fileReader = new FileReader();
+    fileReader.addEventListener("load", () => { this.uploadFileContents = fileReader.result; }, false);
+    fileReader.readAsDataURL(this.uploadFile);
   }
-    
+
   onUploadCLicked() {
-    if (!this.selectedFile) { return; }
+    if (!this.uploadFile) { return; }
 
-    const formData = new FormData();
-    formData.append('name', this.selectedFile.name);
-    formData.append('type', this.selectedFile.type);
-    formData.append('file', this.selectedFile);
+    const file: IFile = {
+      fileId: null,
+      fileName: this.uploadFile.name,
+      fileType: this.uploadFile.type,
+      fileContents: this.uploadFileContents
+    }
 
-    axios.post(
-      'http://localhost/ng-crud-app-backend-php/public/api/files',
-      formData,
-      { headers: {'Content-Type': 'multipart/form-data'}}
-    );
+    axios.post('http://localhost/ng-crud-app-backend-php/public/api/files', file);
   }
 }
