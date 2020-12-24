@@ -25,8 +25,8 @@ export default class About extends Vue {
     this.fetchAllUsers();
 
     axios.get('http://localhost/ng-crud-app-back-end-php/public/api/files/1')
-    .then((response: AxiosResponse<IFile>) => { this.returnedFileContents = response.data.fileContents; })
-    .catch((error) => { console.log(error); });
+    .then((response: AxiosResponse<IFile>) => this.returnedFileContents = response.data.fileContents)
+    .catch((error) => console.log(error));
   }
 
   // eslint-disable-next-line
@@ -36,7 +36,7 @@ export default class About extends Vue {
     this.uploadFile = fileList[0];
 
     const fileReader = new FileReader();
-    fileReader.addEventListener("load", () => { this.uploadFileContents = fileReader.result; }, false);
+    fileReader.addEventListener("load", () => this.uploadFileContents = fileReader.result, false);
     fileReader.readAsDataURL(this.uploadFile);
   }
 
