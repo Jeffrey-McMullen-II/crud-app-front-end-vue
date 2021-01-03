@@ -1,0 +1,9 @@
+import { Component } from 'vue';
+
+import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
+
+export const primeVueComponents = new Map<string, Component>([
+    ['p-button', Button],
+    ['p-inputText', InputText]
+]);

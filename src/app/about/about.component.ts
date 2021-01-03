@@ -40,7 +40,7 @@ export default class About extends Vue {
     fileReader.readAsDataURL(this.uploadFile);
   }
 
-  onUploadCLicked() {
+  onUploadClicked() {
     if (!this.uploadFile) { return; }
 
     const file: IFile = {

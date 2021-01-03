@@ -2,7 +2,7 @@
     <h1>This is an about page</h1>
     
     <input type="file" v-on:change="onFileSelected($event.target.files)">
-    <button v-on:click="onUploadCLicked()">Upload File</button>
+    <button v-on:click="onUploadClicked()">Upload File</button>
 
     <div v-for="user in users" v-bind:key="user.userId">
         {{ user.userId }} |
@@ -11,5 +11,16 @@
         {{ user.userLastName }}
     </div>
 
-    <img v-if="returnedFileContents" :src="returnedFileContents" width="200" height="200"/>
+    <img v-if="returnedFileContents" v-bind:src="returnedFileContents" width="200" height="200"/>
+
+    <div class="p-grid p-col-12">
+        <div class="p-col-6">
+            <p-inputText>lol</p-inputText>
+            <p-button label="Greet"></p-button>
+            Hi
+        </div>
+        <div class="p-col-6">
+            There
+        </div>
+    </div>
 </div>
