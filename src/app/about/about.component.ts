@@ -29,7 +29,6 @@ export default class About extends Vue {
     .catch((error) => console.log(error));
   }
 
-  // eslint-disable-next-line
   onFileSelected(fileList: FileList) {
     if (!fileList.length) { return; }
 
