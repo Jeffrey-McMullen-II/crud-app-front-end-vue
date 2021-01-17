@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
-import About from '../src/app/about/about.component';
-import Home from '../src/app/home/home.component';
-import Welcome from '../src/app/welcome/welcome.component';
+import About from '../src/app/about/about.component.vue';
+import Home from '../src/app/home/home.component.vue';
+import Welcome from '../src/app/welcome/welcome.component.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
