@@ -6,11 +6,11 @@ import 'primevue/resources/themes/saga-blue/theme.css';
 import 'primevue/resources/primevue.min.css';
 
 import App from './app/app.component.vue';
-import { primeVueComponents } from './app/prime-vue-components';
-import router from './app/router';
-import store from './app/store';
+import { primeVueComponents } from './prime-vue-components';
+import Router from '../src/router';
+import Store from '../src/store';
 
-const app = createApp(App).use(PrimeVue).use(router).use(store);
+const app = createApp(App).use(PrimeVue).use(Router).use(Store);
 
 primeVueComponents.forEach((value: Component, key: string) => app.component(key, value));
 
