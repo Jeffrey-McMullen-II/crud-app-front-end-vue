@@ -1,4 +1,4 @@
-export default interface IFile {
+export default interface iFile {
     fileId: number | null,
     fileName: string | null,
     fileType: string | null,
