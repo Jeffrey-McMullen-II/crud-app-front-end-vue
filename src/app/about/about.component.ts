@@ -4,6 +4,8 @@ import { namespace } from 'vuex-class';
 
 import IUser from './shared/models/IUser';
 import IFile from './shared/models/IFile';
+import IPaginationRequest from '../core/shared/models/IPaginationRequest';
+import IPaginationResponse from '../core/shared/models/IPaginationResponse';
 
 const AboutModule = namespace('AboutModule');
 
@@ -15,7 +17,7 @@ export default class About extends Vue {
   uploadFile: File | null = null;
   uploadFileContents: string | ArrayBuffer | null = null;
 
-  returnedFileContents: string | ArrayBuffer | null = null;
+  files: IFile[] | null = null;
 
   get users(): IUser[] {
     return this.getUsers;
@@ -24,9 +26,7 @@ export default class About extends Vue {
   mounted() {
     this.fetchAllUsers();
 
-    axios.get('http://localhost/ng-crud-app-back-end-php/public/api/files/1')
-    .then((response: AxiosResponse<IFile>) => this.returnedFileContents = response.data.fileContents)
-    .catch((error) => console.log(error));
+    this.getSmileys();
   }
 
   onFileSelected(fileList: FileList) {
@@ -37,6 +37,17 @@ export default class About extends Vue {
     const fileReader = new FileReader();
     fileReader.addEventListener("load", () => this.uploadFileContents = fileReader.result, false);
     fileReader.readAsDataURL(this.uploadFile);
+  }
+
+  getSmileys() {
+    const paginationRequest: IPaginationRequest = {
+      pageNumber: 1,
+      resultsPerPage: 5
+    }
+
+    axios.post('http://localhost/ng-crud-app-back-end-php/public/api/files/by-pagination-request', paginationRequest)
+    .then((response: AxiosResponse<IPaginationResponse>) => this.files = response.data.results)
+    .catch((error) => console.log(error));
   }
 
   onUploadClicked() {

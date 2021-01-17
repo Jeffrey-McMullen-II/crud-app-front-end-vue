@@ -11,7 +11,9 @@
         {{ user.userLastName }}
     </div>
 
-    <img v-if="returnedFileContents" v-bind:src="returnedFileContents" width="200" height="200"/>
+    <div v-if="files" v-for="file in files" v-bind:key="file.fileId">
+        <img v-bind:src="file.fileContents" width="200" height="200"/>
+    </div>
 
     <div class="p-grid p-col-12">
         <div class="p-col-6">
