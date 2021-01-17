@@ -1,28 +1,26 @@
-<div>
-    <h1>This is an about page</h1>
+<h1>This is an about page</h1>
     
-    <input type="file" v-on:change="onFileSelected($event.target.files)">
-    <button v-on:click="onUploadClicked()">Upload File</button>
+<input type="file" v-on:change="onFileSelected($event.target.files)">
+<button v-on:click="onUploadClicked()">Upload File</button>
 
-    <div v-for="user in users" v-bind:key="user.userId">
-        {{ user.userId }} |
-        {{ user.userEmail }} |
-        {{ user.userFirstName }} |
-        {{ user.userLastName }}
+<div v-for="user in users" v-bind:key="user.userId">
+    {{ user.userId }} |
+    {{ user.userEmail }} |
+    {{ user.userFirstName }} |
+    {{ user.userLastName }}
+</div>
+
+<div v-if="files" v-for="file in files" v-bind:key="file.fileId">
+    <img v-bind:src="file.fileContents" width="200" height="200"/>
+</div>
+
+<div class="p-grid p-col-12">
+    <div class="p-col-6">
+        <p-inputText>lol</p-inputText>
+        <p-button label="Greet"></p-button>
+        Hi
     </div>
-
-    <div v-if="files" v-for="file in files" v-bind:key="file.fileId">
-        <img v-bind:src="file.fileContents" width="200" height="200"/>
-    </div>
-
-    <div class="p-grid p-col-12">
-        <div class="p-col-6">
-            <p-inputText>lol</p-inputText>
-            <p-button label="Greet"></p-button>
-            Hi
-        </div>
-        <div class="p-col-6">
-            There
-        </div>
+    <div class="p-col-6">
+        There
     </div>
 </div>
