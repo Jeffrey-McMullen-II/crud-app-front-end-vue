@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { Vue } from 'vue-class-component';
 import { namespace } from 'vuex-class';
+import { PageState } from 'primevue/paginator';
 
 import iUser from './shared/models/iUser';
 import iFile from './shared/models/iFile';
@@ -19,6 +20,10 @@ export default class About extends Vue {
 
   files: iFile[] | null = null;
 
+  first = 0;
+  rows = 2;
+  totalRecords: number | null = null;
+
   get users(): iUser[] {
     return this.getUsers;
   }
@@ -26,7 +31,21 @@ export default class About extends Vue {
   mounted() {
     this.fetchAllUsers();
 
-    this.getSmileys();
+    const paginationRequest: iPaginationRequest = {
+      pageNumber: this.first,
+      resultsPerPage: this.rows
+    }
+
+    this.getImages(paginationRequest);
+  }
+
+  onPaged(event: PageState) {
+    const paginationRequest: iPaginationRequest = {
+      pageNumber: event.page,
+      resultsPerPage: this.rows
+    }
+
+    this.getImages(paginationRequest);
   }
 
   onFileSelected(fileList: FileList) {
@@ -39,14 +58,12 @@ export default class About extends Vue {
     fileReader.readAsDataURL(this.uploadFile);
   }
 
-  getSmileys() {
-    const paginationRequest: iPaginationRequest = {
-      pageNumber: 1,
-      resultsPerPage: 5
-    }
-
+  getImages(paginationRequest: iPaginationRequest) {
     axios.post('http://localhost/ng-crud-app-back-end-php/public/api/files/by-pagination-request', paginationRequest)
-    .then((response: AxiosResponse<iPaginationResponse>) => this.files = response.data.results)
+    .then((response: AxiosResponse<iPaginationResponse>) => {
+      this.files = response.data.results;
+      this.totalRecords = response.data.pageCount;
+    })
     .catch((error) => console.log(error));
   }
 
