@@ -1,7 +1,7 @@
 <div class="p-grid p-col-12">
-    <div class="p-col-4"></div>
+    <div class="p-col-3"></div>
 
-    <div class="p-col-4">
+    <div class="p-col-6">
         <h1>This is an about page</h1>
     
         <input type="file" v-on:change="onFileSelected($event.target.files)">
@@ -19,17 +19,17 @@
         </div>
 
         <p-paginator
+            template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
             v-model:first="first"
             v-model:rows="rows"
             v-model:totalRecords="totalRecords"
-            template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
             v-on:page="onPaged($event)">
         </p-paginator>
         <div class="pi pi-spin pi-spinner"></div>
     
-        <div class="p-grid p-col-12">
+        <div class="p-grid p-col-12" disabled="true">
             <div class="p-col-6">
-                <p-inputText>lol</p-inputText>
+                <p-inputText disabled="true">lol</p-inputText>
                 <p-button label="Greet"></p-button>
                 Hi
             </div>
@@ -39,5 +39,5 @@
         </div>
     </div>
 
-    <div class="p-col-4"></div>
+    <div class="p-col-3"></div>
 </div>

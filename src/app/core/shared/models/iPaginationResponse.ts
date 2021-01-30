@@ -1,4 +1,4 @@
 export default interface iPaginationRequest {
-    pageCount: number | null,
+    totalRecords: number | null,
     results: any | null
 }

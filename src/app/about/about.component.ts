@@ -20,8 +20,8 @@ export default class About extends Vue {
 
   files: iFile[] | null = null;
 
-  first = 0;
-  rows = 2;
+  first: number | null = 0;
+  rows: number | null = 2;
   totalRecords: number | null = null;
 
   get users(): iUser[] {
@@ -32,8 +32,8 @@ export default class About extends Vue {
     this.fetchAllUsers();
 
     const paginationRequest: iPaginationRequest = {
-      pageNumber: this.first,
-      resultsPerPage: this.rows
+      first: this.first,
+      rows: this.rows
     }
 
     this.getImages(paginationRequest);
@@ -41,8 +41,8 @@ export default class About extends Vue {
 
   onPaged(event: PageState) {
     const paginationRequest: iPaginationRequest = {
-      pageNumber: event.page,
-      resultsPerPage: this.rows
+      first: event.first,
+      rows: this.rows
     }
 
     this.getImages(paginationRequest);
@@ -59,10 +59,10 @@ export default class About extends Vue {
   }
 
   getImages(paginationRequest: iPaginationRequest) {
-    axios.post('http://localhost/ng-crud-app-back-end-php/public/api/files/by-pagination-request', paginationRequest)
+    axios.post('http://localhost/ng-crud-app-back-end-php/public/api/files/page-request', paginationRequest)
     .then((response: AxiosResponse<iPaginationResponse>) => {
       this.files = response.data.results;
-      this.totalRecords = response.data.pageCount;
+      this.totalRecords = response.data.totalRecords;
     })
     .catch((error) => console.log(error));
   }
