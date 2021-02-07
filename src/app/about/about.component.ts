@@ -21,8 +21,10 @@ export default class About extends Vue {
   files: iFile[] | null = null;
 
   first: number | null = 0;
-  rows: number | null = 2;
+  rows: number | null = 1;
   totalRecords: number | null = null;
+
+  isLoading = true;
 
   get users(): iUser[] {
     return this.getUsers;
@@ -45,6 +47,7 @@ export default class About extends Vue {
       rows: this.rows
     }
 
+    this.isLoading = true;
     this.getImages(paginationRequest);
   }
 
@@ -63,8 +66,14 @@ export default class About extends Vue {
     .then((response: AxiosResponse<iPaginationResponse>) => {
       this.files = response.data.results;
       this.totalRecords = response.data.totalRecords;
+      this.isLoading = false;
     })
     .catch((error) => console.log(error));
+  }
+
+  onImageClicked(fileProxy: iFile) {
+    const file: iFile = Object.assign({}, fileProxy);
+    const fileWindow = window.open(file.fileContents?.toString(), '_blank', '', false);
   }
 
   onUploadClicked() {

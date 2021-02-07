@@ -4,8 +4,8 @@
     <div class="p-col-6">
         <h1>This is an about page</h1>
     
-        <input type="file" v-on:change="onFileSelected($event.target.files)">
-        <button v-on:click="onUploadClicked()">Upload File</button>
+        <!-- <input type="file" v-on:change="onFileSelected($event.target.files)">
+        <button v-on:click="onUploadClicked()">Upload File</button> -->
     
         <div v-for="user in users" v-bind:key="user.userId">
             {{ user.userId }} |
@@ -14,8 +14,16 @@
             {{ user.userLastName }}
         </div>
         
-        <div v-if="files" v-for="file in files" v-bind:key="file.fileId">
-            <img v-bind:src="file.fileContents" width="200" height="200"/>
+        <div v-if="isLoading" class="pi pi-spin pi-spinner"></div>
+        <div v-if="!isLoading && files" v-for="file in files" v-bind:key="file.fileId">
+            <img
+                class="clickable"
+                v-bind:src="file.fileContents"
+                v-bind:alt="file.fileName"
+                width="200"
+                height="200"
+                v-on:click="onImageClicked(file)"
+            />
         </div>
 
         <p-paginator
@@ -25,7 +33,6 @@
             v-model:totalRecords="totalRecords"
             v-on:page="onPaged($event)">
         </p-paginator>
-        <div class="pi pi-spin pi-spinner"></div>
     
         <div class="p-grid p-col-12" disabled="true">
             <div class="p-col-6">
