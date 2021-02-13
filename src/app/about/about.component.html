@@ -1,11 +1,10 @@
-<div class="p-grid p-col-12">
-    <div class="p-col-3"></div>
+<div class="p-grid p-col-12 horizontal-center">
 
-    <div class="p-col-6">
+    <div class="p-col-12">
         <h1>This is an about page</h1>
     
-        <!-- <input type="file" v-on:change="onFileSelected($event.target.files)">
-        <button v-on:click="onUploadClicked()">Upload File</button> -->
+        <input type="file" v-on:change="onFileSelected($event.target.files)">
+        <button v-on:click="onUploadClicked()">Upload File</button>
     
         <div v-for="user in users" v-bind:key="user.userId">
             {{ user.userId }} |
@@ -13,16 +12,28 @@
             {{ user.userFirstName }} |
             {{ user.userLastName }}
         </div>
-        
-        <div v-if="isLoading" class="pi pi-spin pi-spinner"></div>
-        <div v-if="!isLoading && files" v-for="file in files" v-bind:key="file.fileId">
+
+        <div v-if="isLoading">
+            <div>Loading...</div>
+            <br>
             <img
-                class="clickable"
+                class="pi pi-spin"
+                alt="Pink Star"
+                src="@/assets/PinkStar.png"
+                width="200"
+                height="200"
+            />
+        </div>
+
+        <div v-if="!isLoading && files" v-for="file in files" v-bind:key="file.fileId">
+            <div>{{ file.fileName }}</div>
+            <br>
+            <img
+                class="vertical-center"
                 v-bind:src="file.fileContents"
                 v-bind:alt="file.fileName"
                 width="200"
                 height="200"
-                v-on:click="onImageClicked(file)"
             />
         </div>
 
@@ -40,11 +51,9 @@
                 <p-button label="Greet"></p-button>
                 Hi
             </div>
-            <div class="p-col-6">
+            <div class="p-col-6 horizontal-left">
                 There
             </div>
         </div>
     </div>
-
-    <div class="p-col-3"></div>
 </div>

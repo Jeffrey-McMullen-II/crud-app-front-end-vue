@@ -26,6 +26,8 @@ export default class About extends Vue {
 
   isLoading = true;
 
+  timeout: number | undefined;
+
   get users(): iUser[] {
     return this.getUsers;
   }
@@ -42,13 +44,18 @@ export default class About extends Vue {
   }
 
   onPaged(event: PageState) {
-    const paginationRequest: iPaginationRequest = {
-      first: event.first,
-      rows: this.rows
-    }
-
     this.isLoading = true;
-    this.getImages(paginationRequest);
+
+    clearTimeout(this.timeout);
+
+    this.timeout = setTimeout(() => {
+      const paginationRequest: iPaginationRequest = {
+        first: event.first,
+        rows: this.rows
+      }
+      
+      this.getImages(paginationRequest);
+    }, 1000);
   }
 
   onFileSelected(fileList: FileList) {
@@ -62,7 +69,7 @@ export default class About extends Vue {
   }
 
   getImages(paginationRequest: iPaginationRequest) {
-    axios.post('http://localhost/ng-crud-app-back-end-php/public/api/files/page-request', paginationRequest)
+    axios.post('http://192.168.0.22/ng-crud-app-back-end-php/public/api/files/page-request', paginationRequest)
     .then((response: AxiosResponse<iPaginationResponse>) => {
       this.files = response.data.results;
       this.totalRecords = response.data.totalRecords;
@@ -73,7 +80,10 @@ export default class About extends Vue {
 
   onImageClicked(fileProxy: iFile) {
     const file: iFile = Object.assign({}, fileProxy);
-    const fileWindow = window.open(file.fileContents?.toString(), '_blank', '', false);
+    const fileWindow = window.open('', '_blank', '', false);
+    if (fileWindow !== null) {
+      fileWindow.document.write('<img src="' + file.fileContents + '">');
+    }
   }
 
   onUploadClicked() {
@@ -86,6 +96,6 @@ export default class About extends Vue {
       fileContents: this.uploadFileContents
     }
 
-    axios.post('http://localhost/ng-crud-app-back-end-php/public/api/files', file);
+    axios.post('http://192.168.0.22/ng-crud-app-back-end-php/public/api/files', file);
   }
 }

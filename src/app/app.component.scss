@@ -1,20 +1,31 @@
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    //text-align: center;
-    color: #2c3e50;
-  }
-  
-#nav {
-  padding: 30px;
+.clickable {
+  cursor: pointer;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.horizontal-left {
+  text-align: left;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.horizontal-center {
+  text-align: center;
+}
+
+.horizontal-right {
+  text-align: right;
+}
+
+.vertical-center {
+  top: 50%;
+}
+
+.spinner-small {
+  font-size: 25px;
+}
+
+.spinner-medium {
+  font-size: 50px;
+}
+
+.spinner-large {
+  font-size: 100px;
 }

@@ -5,7 +5,7 @@ import iUser from '../models/iUser';
 
 @Module({ namespaced: true })
 export default class AboutModule extends VuexModule {
-  private users!: iUser[];
+  private users: iUser[] | null = null;
 
   get getUsers() {
     return this.users;
@@ -13,7 +13,7 @@ export default class AboutModule extends VuexModule {
 
   @Action
   public async fetchAllUsers() {
-    await axios.get('http://localhost/ng-crud-app-back-end-php/public/api/users/first-name/ascending')
+    await axios.get('http://192.168.0.22/ng-crud-app-back-end-php/public/api/users/first-name/ascending')
     .then((response: AxiosResponse<iUser>) => this.context.commit('setUsers', response.data))
     .catch((error) => console.log(error));
   }
