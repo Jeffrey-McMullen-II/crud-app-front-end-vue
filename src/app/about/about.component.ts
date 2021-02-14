@@ -69,7 +69,7 @@ export default class About extends Vue {
   }
 
   getImages(paginationRequest: iPaginationRequest) {
-    axios.post('http://192.168.0.22/ng-crud-app-back-end-php/public/api/files/page-request', paginationRequest)
+    axios.post('http://192.168.0.22/api/public/files/page-request', paginationRequest)
     .then((response: AxiosResponse<iPaginationResponse>) => {
       this.files = response.data.results;
       this.totalRecords = response.data.totalRecords;
@@ -96,6 +96,6 @@ export default class About extends Vue {
       fileContents: this.uploadFileContents
     }
 
-    axios.post('http://192.168.0.22/ng-crud-app-back-end-php/public/api/files', file);
+    axios.post('http://192.168.0.22/api/public/files', file);
   }
 }
