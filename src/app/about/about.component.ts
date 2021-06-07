@@ -69,7 +69,7 @@ export default class About extends Vue {
   }
 
   getImages(paginationRequest: iPaginationRequest) {
-    axios.post('http://192.168.0.22/api/public/files/images/pages', paginationRequest)
+    axios.post('http://localhost/api/public/files/images/pages', paginationRequest)
     .then((response: AxiosResponse<iPaginationResponse>) => {
       this.files = response.data.results;
       this.totalRecords = response.data.totalRecords;
@@ -96,6 +96,6 @@ export default class About extends Vue {
       fileContents: this.uploadFileContents
     }
 
-    axios.post('http://192.168.0.22/api/public/files', file);
+    axios.post('http://localhost/api/public/files', file);
   }
 }
