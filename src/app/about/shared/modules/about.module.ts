@@ -11,15 +11,13 @@ export default class AboutModule extends VuexModule {
     return this.users;
   }
 
-  @Action
-  public async fetchAllUsers() {
+  @Action async fetchAllUsers() {
     await axios.get('http://192.168.0.22/api/public/users/first-name/ascending')
     .then((response: AxiosResponse<iUser>) => this.context.commit('setUsers', response.data))
     .catch((error) => console.log(error));
   }
 
-  @Mutation
-  public setUsers(users: iUser[]) {
+  @Mutation setUsers(users: iUser[]) {
     this.users = users;
   }
 }

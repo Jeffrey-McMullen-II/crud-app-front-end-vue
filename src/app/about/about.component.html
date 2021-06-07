@@ -13,6 +13,14 @@
             {{ user.userLastName }}
         </div>
 
+        <p-paginator
+            template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+            v-model:first="first"
+            v-model:rows="rows"
+            v-model:totalRecords="totalRecords"
+            v-on:page="onPaged($event)">
+        </p-paginator>
+
         <div v-if="isLoading">
             <div>Loading...</div>
             <br>
@@ -26,7 +34,6 @@
         </div>
 
         <div v-if="!isLoading && files" v-for="file in files" v-bind:key="file.fileId">
-            <div>{{ file.fileName }}</div>
             <br>
             <img
                 class="vertical-center"
@@ -35,6 +42,7 @@
                 width="200"
                 height="200"
             />
+            <div>{{ file.fileName }}</div>
         </div>
 
         <p-paginator

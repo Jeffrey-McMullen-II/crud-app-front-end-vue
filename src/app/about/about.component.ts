@@ -21,7 +21,7 @@ export default class About extends Vue {
   files: iFile[] | null = null;
 
   first: number | null = 0;
-  rows: number | null = 1;
+  rows: number | null = 5;
   totalRecords: number | null = null;
 
   isLoading = true;
@@ -69,7 +69,7 @@ export default class About extends Vue {
   }
 
   getImages(paginationRequest: iPaginationRequest) {
-    axios.post('http://192.168.0.22/api/public/files/page-request', paginationRequest)
+    axios.post('http://192.168.0.22/api/public/files/images/pages', paginationRequest)
     .then((response: AxiosResponse<iPaginationResponse>) => {
       this.files = response.data.results;
       this.totalRecords = response.data.totalRecords;

@@ -2,43 +2,13 @@
     <img alt="Vue logo" src="@/assets/PinkStar.png" width="200" height="200"/>
     <hello-world v-bind:msg="message"/>
 
-    <iframe
-        src="http://192.168.0.22/api/public/files?fileName=Kirby_of_the_Stars.jpg&width=200&height=200&link=http://192.168.0.22:8080/home"
-        sandbox="allow-top-navigation allow-scripts"
-        allowTransparency="true"
-        scrolling="no"
-        frameborder="0"
-        width="200"
-        height="200">
-    </iframe>
-
-    <iframe
-        src="http://192.168.0.22/api/public/files?fileName=spongebob.png&width=200&height=200&link=http://192.168.0.22:8080/home"
-        sandbox="allow-top-navigation allow-scripts"
-        allowTransparency="true"
-        scrolling="no"
-        frameborder="0"
-        width="200"
-        height="200">
-    </iframe>
-
-    <iframe
-        src="http://192.168.0.22/api/public/files?fileName=forest.jpeg&width=200&height=200&link=http://192.168.0.22:8080/home"
-        sandbox="allow-top-navigation allow-scripts"
-        allowTransparency="true"
-        scrolling="no"
-        frameborder="0"
-        width="200"
-        height="200">
-    </iframe>
-
-    <iframe
-        src="http://192.168.0.22/api/public/files?fileName=smiley.jpeg&width=200&height=200&link=http://192.168.0.22:8080/home"
-        sandbox="allow-top-navigation allow-scripts"
-        allowTransparency="true"
-        scrolling="no"
-        frameborder="0"
-        width="200"
-        height="200">
-    </iframe>
+    <div v-for="item in 5">
+        <div style="text-align: center; position: relative;">
+            <object
+                data="http://192.168.0.22/api/public/files/images?fileName=Kirby_of_the_Stars.jpg&width=200&height=200&title=hello"
+                width="200"
+                height="200">
+            </object>
+        </div>
+    </div>
 </div>
