@@ -8,9 +8,9 @@
     
         <div v-for="user in users" v-bind:key="user.userId">
             {{ user.userId }} |
-            {{ user.userEmail }} |
-            {{ user.userFirstName }} |
-            {{ user.userLastName }}
+            {{ user.email }} |
+            {{ user.firstName }} |
+            {{ user.lastName }}
         </div>
 
         <p-paginator
